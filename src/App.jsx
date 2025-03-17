@@ -5,7 +5,7 @@ function App() {
 
   const [activeId, setActiveId] = useState('')
   const [FAQActiveId, setFAQActiveId] = useState('')
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const featuresInfo = [
     {
       id:'1',
@@ -81,26 +81,49 @@ function App() {
     },
   ]
   return (
-    <main className='px-24 poppins-regular'>
-      <nav className='sticky top-0 left-0 z-50  w-full bg-white text-sm flex justify-between items-center py-10'>
+    <main className='relative px-8 md:px-16 xl:px-24 poppins-regular'>
+      <nav className='sticky top-0 left-0 z-50 w-full bg-white text-sm flex justify-between items-center py-8 xl:py-10'>
         <img
           src='/fc-logo.svg'
           alt='Funds connect logo'
+          className='z-50'
         />
-        <ul className='flex gap-10'>
+        <ul className='hidden lg:flex gap-6 xl:gap-10 *:hover:text-[#08ECB3] *:transition-all *:duration-200 *:cursor-pointer'> 
           <li>Use Cases</li>
           <li>Features</li>
           <li>Benefits</li>
           <li>Funding Solutions</li>
         </ul>
-        <div className='space-x-4 *:px-6 *:py-3 *:rounded-xl *:transition-all *:duration-200 '>
+        <div className='hidden lg:block space-x-4  *:px-4 *:py-2 xl:*:px-6 xl:*:py-3 *:rounded-xl *:transition-all *:duration-200 *:cursor-pointer'>
           <button className='hover:bg-black/5 '>Log-in</button>
           <button className='bg-[#08ECB3] text-white poppins-semibold hover:bg-[#07d4a1]'>Get Started</button>
         </div>
+
+        <img
+          src='/menu-icon.png'
+          alt='menu icon'
+          className='lg:hidden size-8 cursor-pointer'
+          onClick={()=>setIsMenuOpen(true)}
+        />
+
+          <div className={`fixed z-40 top-0 left-0 pt-40 pb-20 h-full ${isMenuOpen ? "w-[60%] sm:w-[45%]":"w-0"} transition-all duration-200 bg-white overflow-hidden flex flex-col justify-between items-center`}>
+            <ul className='text-lg sm:text-xl flex flex-col gap-6 *:hover:text-[#08ECB3] *:transition-all *:duration-200 *:cursor-pointer'> 
+              <li>Use Cases</li>
+              <li>Features</li>
+              <li>Benefits</li>
+              <li>Funding Solutions</li>
+            </ul>
+            <div className='flex flex-col gap-2 sm:text-lg *:px-6 *:py-3 *:rounded-xl *:transition-all *:duration-200 *:cursor-pointer'>
+              <button className='hover:bg-black/5 '>Log-in</button>
+              <button className='bg-[#08ECB3] text-white poppins-semibold hover:bg-[#07d4a1]'>Get Started</button>
+            </div>
+          </div>
+          {isMenuOpen && <div onClick={()=>setIsMenuOpen(false)} className='z-30 fixed top-0 left-0 size-full bg-black/20'/>}
+
       </nav>
       <section className='mt-14 text-center flex gap-8 flex-col justify-center items-center'>
-        <div className='flex gap-8 items-center text-sm py-1 px-2 rounded-full border border-black/30'>
-          <div className=''>
+        <div className='flex  sm:flex-row flex-col sm:gap-8 items-center text-sm py-1 px-6  sm:py-2 sm:px-4 rounded-full border border-black/30'>
+          <div >
             {
               ['','',''].map((_,i)=>(
                 <img
@@ -114,10 +137,10 @@ function App() {
           </div>
           <p><span className='poppins-bold'>200+</span> brokers are using FundsConnect</p>
         </div>
-        <h1 className='text-5xl leading-14 poppins-semibold'>Empowering Australian brokers<br/> and introducers to facilitate<br/> commercial finance transactions</h1>
-        <p className='text-black/50 w-[50%]'>We make loan origination easier, guaranteeing seamless client interactions, straightforward settlements, and quicker deal closures.</p>
-        <button className='bg-[#08ECB3] text-white poppins-semibold px-4 py-3 rounded-xl hover:bg-[#07d4a1] transition-all duration-200'>Get started - it&apos;s free!</button>
-        <div className='relative w-full flex justify-center mt-10'>
+        <h1 className='text-3xl leading-10 sm:text-4xl sm:leading-12 lg:text-5xl lg:leading-14 poppins-semibold'>Empowering Australian brokers<br className='hidden sm:block'/> and introducers to facilitate<br/> commercial finance transactions</h1>
+        <p className='text-black/50 sm:w-[70%] lg:w-[50%]'>We make loan origination easier, guaranteeing seamless client interactions, straightforward settlements, and quicker deal closures.</p>
+        <button className='bg-[#08ECB3] text-white cursor-pointer poppins-semibold px-4 py-3 rounded-xl hover:bg-[#07d4a1] transition-all duration-200'>Get started - it&apos;s free!</button>
+        <div className='relative  w-full flex justify-center mt-10'>
           <img 
             src='/fc-img1.png'
             alt='hero photo'
@@ -126,18 +149,18 @@ function App() {
           <img 
             src='/fc-img2.png'
             alt='hero photo 2'
-            className='absolute right-0 bottom-0 -translate-x-[15%] border-4 border-[#eee] rounded-3xl'
+            className='absolute right-0 bottom-0 w-24 sm:w-48 lg:w-auto sm:-translate-x-20 lg:-translate-x-[15%] border-4 border-[#eee] rounded-3xl'
           />
-          <div className='absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-white to-transparent'/>
+          <div className=' absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-white to-transparent'/>
         </div>
       </section>
-      <section className='my-20 flex items-center justify-between'>
-        <header className='w-[40%] space-y-4'>
-          <div className=' w-fit bg-[#E7FEF8] text-[#08ECB3] py-3 px-4 rounded-xl'>Use Cases</div>
-          <h2 className='text-[40px] poppins-semibold leading-12'>Who is FundsConnect for?</h2>
+      <section className='my-20 flex flex-col gap-10 sm:gap-0 sm:flex-row lg:items-center justify-between'>
+        <header className='static md:sticky lg:static  h-fit left-0 top-24 sm:w-[40%] space-y-4'>
+          <div className=' w-fit bg-[#E7FEF8] text-[#08ECB3] py-2 sm:py-3 px-4 rounded-xl'>Use Cases</div>
+          <h2 className='text-2xl sm:text-[40px]  poppins-semibold leading-12'>Who is FundsConnect for?</h2>
           <p className='text-black/50'>FundsConnect is built for every use case who are looking to diversify their offering by facilitating commercial finance transactions.</p>
         </header>
-        <main className='grid grid-cols-2 gap-6 '>
+        <main className='grid lg:grid-cols-2 gap-6 '>
           <div className='w-72 space-y-4 p-4 border border-black/10 rounded-xl'>
             <div className='bg-[#E7FEF8] w-fit p-2 rounded-xl'>
               <img
@@ -183,11 +206,11 @@ function App() {
       </section>
       <section className='my-36 space-y-8'>
         <header className='space-y-4 text-center flex flex-col items-center'>
-          <div className=' w-fit bg-[#E7FEF8] text-[#08ECB3] py-3 px-4 rounded-xl'>Features</div>
-          <h2 className='text-[40px] leading-12 poppins-semibold'>Everything you would expect <br/>all in one platform</h2>
+          <div className=' w-fit bg-[#E7FEF8] text-[#08ECB3] py-2 sm:py-3 px-4 rounded-xl'>Features</div>
+          <h2 className='text-2xl sm:text-[40px]  leading-12 poppins-semibold'>Everything you would expect <br/>all in one platform</h2>
           <p className='text-black/50'>FundsConnect technology empowers users with<br/>market-leading features.</p>
         </header>
-        <div className='flex justify-between gap-16'>
+        <div className='flex flex-col-reverse lg:flex-row items-center lg:items-stretch justify-between gap-16'>
           <main className='flex-1 space-y-4'>
             {
               featuresInfo.map((feature,i)=>{
@@ -208,7 +231,7 @@ function App() {
               })
             }
           </main>
-          <div className='flex items-center rounded-xl bg-[#F8F8F8]'>
+          <div className='w-[70%] lg:w-auto flex items-center rounded-xl bg-[#F8F8F8]'>
             <img 
               src='/fc-img3.png'
               alt='feature photo'
@@ -217,9 +240,9 @@ function App() {
         </div>
       </section>
       <section className='my-36 space-y-14'>
-        <div className='space-y-4 '>
-          <div className='w-fit bg-[#E7FEF8] text-[#08ECB3] py-3 px-4 rounded-xl'>Benefits</div>
-          <h2 className='text-[40px] poppins-semibold'>Why FundsConnect?</h2>
+        <div className='space-y-4'>
+          <div className='w-fit bg-[#E7FEF8] text-[#08ECB3] py-2 sm:py-3 px-4 rounded-xl'>Benefits</div>
+          <h2 className='text-2xl sm:text-[40px]  poppins-semibold'>Why FundsConnect?</h2>
         </div>
         <main className='flex gap-8 flex-wrap justify-between'>
            <div className='w-72 space-y-4 rounded-xl'>
@@ -264,12 +287,12 @@ function App() {
            </div>
         </main>
       </section>
-      <section className='my-36 space-y-14 flex justify-between'>
+      <section className='my-36 space-y-14 flex lg:flex-row flex-col justify-between'>
         <div className='space-y-4 '>
-          <div className='w-fit bg-[#E7FEF8] text-[#08ECB3] py-3 px-4 rounded-xl'>Funding Solutions</div>
-          <h2 className='text-[40px] poppins-semibold'>Funding Solutions</h2>
+          <div className='w-fit bg-[#E7FEF8] text-[#08ECB3] py-2 sm:py-3 px-4 rounded-xl'>Funding Solutions</div>
+          <h2 className='text-2xl sm:text-[40px]  poppins-semibold'>Funding Solutions</h2>
         </div>
-        <main className='grid grid-cols-2 gap-4'>
+        <main className='grid sm:grid-cols-2 gap-4'>
            <div className='w-72 p-4 space-y-4 rounded-xl'>
               <div className='bg-[#E7FEF8] w-fit p-2 rounded-xl'>
                 <img
@@ -334,11 +357,11 @@ function App() {
       </section>
       <section className='my-36 flex flex-col items-center space-y-14'>
         <header className='space-y-4 text-center flex flex-col items-center'>
-          <div className=' w-fit bg-[#E7FEF8] text-[#08ECB3] py-3 px-4 rounded-xl'>FAQ</div>
-          <h2 className='text-[40px] leading-12 poppins-semibold'>Frequently asked questions</h2>
+          <div className=' w-fit bg-[#E7FEF8] text-[#08ECB3] py-2 sm:py-3 px-4 rounded-xl'>FAQ</div>
+          <h2 className='text-2xl sm:text-[40px]  leading-12 poppins-semibold'>Frequently asked questions</h2>
           <p className='text-black/50'>Have other questions? Get in touch with our team via support@fundsconnect.com.au</p>
         </header>
-          <main className='relative px-16 grid grid-cols-2 place-items-start gap-6 '>
+          <main className='relative lg:px-16 grid sm:grid-cols-2 place-items-start gap-6 '>
             <div className='absolute bottom-0 w-full h-[30%] bg-gradient-to-t from-white to-transparent'/>
             {
               FAQInfo.map((feature,i)=>{
@@ -362,28 +385,28 @@ function App() {
           <button className=' w-fit border border-black/10 text-black/50 py-3 px-4 rounded-xl'>Load more FAQs</button>
 
       </section>
-      <section className='relative overflow-hidden my-36 bg-[#08ECB3] p-14 rounded-xl text-white'>
-        <div className='w-[40%] space-y-6'>
-          <h2 className='text-5xl leading-12 poppins-semibold'>Get started with FundsConnect</h2>
-          <p className=''>Have other questions? Get in touch with our team via support@fundsconnect.com.au</p>
-          <div className='space-x-4'>
-            <button className='text-[#08ECB3] bg-white poppins-semibold px-4 py-3 rounded-xl hover:bg-[#07d4a1] transition-all duration-200'>Get started - it&apos;s free!</button>
-            <button className=' px-4 py-3 rounded-xl poppins-semibold border border-white text-white '>Request demo</button>
+      <section className='relative overflow-hidden my-36 bg-[#08ECB3] p-8 sm:p-14 rounded-xl text-white'>
+        <div className='lg:w-[40%] space-y-6 text-center lg:text-start flex flex-col items-center lg:block'>
+          <h2 className='text-4xl sm:text-5xl sm:leading-14 poppins-semibold'>Get started with FundsConnect</h2>
+          <p className='text-sm sm:text-base'>Have other questions? Get in touch with our team via support@fundsconnect.com.au</p>
+          <div className='space-x-4 space-y-4 *:transition-all *:duration-200 *:cursor-pointer'>
+            <button className='text-[#08ECB3] bg-white poppins-semibold px-4 py-2 sm:px-4 sm:py-3 rounded-xl hover:text-white hover:bg-[#07d4a1] '>Get started - it&apos;s free!</button>
+            <button className=' px-4 py-2 sm:px-4 sm:py-3 rounded-xl poppins-semibold border border-white text-white hover:bg-[#07d4a1] '>Request demo</button>
           </div>
         </div>
         <img
           src='/fc-img1.png'
           alt='hero photo'
-          className='absolute -bottom-1/2 left-full -translate-x-1/2'
+          className='absolute hidden lg:block -bottom-1/2 left-full -translate-x-1/2'
         />
       </section>
-      <footer className='mt-36 mb-16 flex justify-between'>
+      <footer className='mt-36 mb-16 flex gap-16 flex-wrap justify-between'>
           <div className='flex-1 space-y-6'>
             <img
               src='/fc-logo.svg'
               alt='logo'
             />
-            <p className='w-[30%] text-black/50 text-sm'>
+            <p className='w-[70%] xl:w-[50%] text-black/50 text-sm'>
             © 2024 FundsConnect Technologies Pty Ltd
             <br/><br/>
             FundsConnect provides funding solutions
@@ -391,10 +414,10 @@ function App() {
             and fall outside the NCCP legislation.
             </p>
           </div>
-          <main className='flex gap-28'>
+          <main className='flex flex-wrap gap-20 lg:gap-28'>
             <div className='space-y-4'>
               <h3 className='text-sm poppins-semibold'>Platform</h3>
-              <ul className='space-y-3 text-black/50'>
+              <ul className='space-y-3 text-black/50 *:hover:text-[#08ECB3] *:transition-all *:duration-200 *:cursor-pointer'>
                 <li>Use Cases</li>
                 <li>Features</li>
                 <li>Benefits</li>
@@ -403,7 +426,7 @@ function App() {
             </div>
             <div className='space-y-4'>
               <h3 className='text-sm poppins-semibold'>Company</h3>
-              <ul className='space-y-3 text-black/50'>
+              <ul className='space-y-3 text-black/50 *:hover:text-[#08ECB3] *:transition-all *:duration-200 *:cursor-pointer'>
                 <li>FAQ</li>
                 <li>Support</li>
                 <li>Privacy Policy</li>
@@ -412,7 +435,7 @@ function App() {
             </div>
             <div className='space-y-4'>
               <h3 className='text-sm poppins-semibold'>Connect</h3>
-              <ul className='space-y-3 text-black/50'>
+              <ul className='space-y-3 text-black/50 *:hover:text-[#08ECB3] *:transition-all *:duration-200 *:cursor-pointer'>
                 <li>LinkedIn</li>
                 <li>Facebook</li>
                 <li>Instagram</li>
